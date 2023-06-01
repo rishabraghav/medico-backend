@@ -2,10 +2,10 @@ const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const cors = require('cors');
-
+require('dotenv').config();
 
 const app = express();
-const PORT = 3001;
+const PORT = process.env.PORT || 3001;
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
@@ -18,7 +18,7 @@ app.use(cors({
 //MONGOOSE AND MODELS
 
 
-mongoose.connect('mongodb+srv://rishabhraghav2012:7aaADi8dOiwTrpc1@medico.yih80di.mongodb.net/?retryWrites=true&w=majority', {
+mongoose.connect(process.env.MONGO_URI, {
     useNewUrlParser: true,
     // useUnifiedTopolody: true
 }).then(() => {
@@ -46,6 +46,7 @@ mongoose.connect('mongodb+srv://rishabhraghav2012:7aaADi8dOiwTrpc1@medico.yih80d
   app.get('/', (req, res) => {
     // Fetch data from MongoDB
     console.log("hey");
+
     Medicine.find()
       .then(data => {
         // Send the retrieved data as a response
@@ -137,5 +138,5 @@ mongoose.connect('mongodb+srv://rishabhraghav2012:7aaADi8dOiwTrpc1@medico.yih80d
 
 
 app.listen(PORT, () => {
-    console.log("server started at port 3000");
+    console.log(`server started at port ${PORT}`);
 })
