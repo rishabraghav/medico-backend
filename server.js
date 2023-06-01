@@ -45,7 +45,7 @@ mongoose.connect('mongodb+srv://rishabhraghav2012:7aaADi8dOiwTrpc1@medico.yih80d
 
   app.get('/', (req, res) => {
     // Fetch data from MongoDB
-    // console.log("hey");
+    console.log("hey");
     Medicine.find()
       .then(data => {
         // Send the retrieved data as a response
