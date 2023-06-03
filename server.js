@@ -126,19 +126,20 @@ mongoose.connect(process.env.MONGO_URI, {
   app.delete('/:id', (req, res) => {
     const {id} = req.params;
     
-    Medicine.deleteOne({_id: id})
-    .then(deletedMedicine => {
-      if (!deletedMedicine) {
-        // If the medicine with the provided ID doesn't exist
-        return res.status(404).json({ message: 'Medicine not found' , deletedMedicine, id});
-      }
+    Medicine.deleteOne({ _id: id })
+  .then(deletedMedicine => {
+    if (deletedMedicine.deletedCount === 0) {
+      // If the medicine with the provided ID doesn't exist
+      console.log("id:", id);
+      return res.status(404).json({ message: 'Medicine not found' });
+    }
 
-      res.json({ message: 'Medicine deleted successfully' });
-    })
-    .catch(error => {
-      console.error('Error deleting medicine:', error);
-      res.status(500).send('Internal Server Error');
-    });
+    res.json({ message: 'Medicine deleted successfully' });
+  })
+  .catch(error => {
+    console.error('Error deleting medicine:', error);
+    res.status(500).send('Internal Server Error');
+  });
   });
 
 
