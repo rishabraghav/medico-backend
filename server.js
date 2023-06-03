@@ -11,7 +11,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 app.use(cors({
-  origin: 'http://localhost:3000',
+  origin: 'https://medico-sks.netlify.app',
 }));
 
 app.use((req, res, next) => {
