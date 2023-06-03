@@ -126,13 +126,10 @@ mongoose.connect(process.env.MONGO_URI, {
   app.delete('/:id', (req, res) => {
     const {id} = req.params;
     
-    Medicine.findByIdAndDelete(id)
+    Medicine.deleteOne({_id: id})
     .then(deletedMedicine => {
       if (!deletedMedicine) {
         // If the medicine with the provided ID doesn't exist
-        console.log("deleted : ", deletedMedicine);
-        console.log("id:", id);
-        console.log(Medicine.find({}));
         return res.status(404).json({ message: 'Medicine not found' , deletedMedicine, id});
       }
 
