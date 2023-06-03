@@ -132,7 +132,7 @@ mongoose.connect(process.env.MONGO_URI, {
         console.log("deleted : ", deletedMedicine);
         console.log("id:", id);
         console.log(Medicine.find({}));
-        return res.status(404).json({ message: 'Medicine not found' });
+        return res.status(404).json({ message: 'Medicine not found' , deletedMedicine, id});
       }
 
       res.json({ message: 'Medicine deleted successfully' });
