@@ -79,7 +79,7 @@ mongoose.connect(process.env.MONGO_URI, {
     });
   });
 
-  app.post('/', (req, res) => {
+  app.post('/add', (req, res) => {
     const {name, description, quantity} = req.body;
 
     Medicine.findOne({ name })
