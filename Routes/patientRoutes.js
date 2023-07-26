@@ -54,6 +54,21 @@ router.post('/add', (req, res) => {
     })
 });
 
+router.delete('/:id', async (req, res) => {
+  const {id} = req.params;
+  
+  try{
+    const deletedPatient = await Patient.findByIdAndDelete(id);
+
+    if(!deletedPatient) return res.status(404).json({error: "Patient not found in the database"});
+    return res.json({message: "Patient is deleted successfully"});
+  } catch(err) {
+    console.error("error in deleting patient in server side", err);
+
+    return res.status(500).json({error: "error in deleting patient from server side"});
+  }
+});
+
 
 router.delete('/:id/:infoId', async (req, res) => {
   const { id, infoId } = req.params;
@@ -65,7 +80,7 @@ router.delete('/:id/:infoId', async (req, res) => {
       { new: true }
     );
 
-    if(!updatedPatient) return res.status(404).json({error: "Patient not found in database"}); 
+    if(!updatedPatient) return res.status(404).json({error: "Patient's record not found in database"}); 
     return res.json({message: "Patient Info is deleted from the database successfully"});
   } catch (err) {
     console.error("error in deleting the patient record from server side: ", err);
@@ -73,6 +88,7 @@ router.delete('/:id/:infoId', async (req, res) => {
     return res.status(500).json({error: "error in deleting patient Info from server side"});
   }
   });
+
 
 
 module.exports = router;
