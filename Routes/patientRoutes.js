@@ -6,11 +6,14 @@ const router = express.Router();
 router.get('/', (req, res) => {
   Patient.find()
     .then((data) => {
+      console.log("Patients ROOT")
       res.json(data);
     })
     .catch((error) => {
-      console.error(error);
+      cconsole.error('Error retrieving data:', error);
+      res.status(500).send('Internal Server Error');
     })
+    
 });
 
 router.post('/add', (req, res) => {

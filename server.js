@@ -27,7 +27,7 @@ app.use((req, res, next) => {
 //MONGOOSE CONNECTION
 
 
-mongoose.connect("mongodb://localhost:27017/medicineDatabase", {
+mongoose.connect(process.env.MONGO_URI, {
     useNewUrlParser: true,
     // useUnifiedTopolody: true
 }).then(() => {
