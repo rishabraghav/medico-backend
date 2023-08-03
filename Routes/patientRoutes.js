@@ -11,7 +11,7 @@ router.get('/', (req, res) => {
     })
     .catch((error) => {
       cconsole.error('Error retrieving data:', error);
-      res.status(500).send('Internal Server Error: from backend');
+      res.status(500).send('Internal Server Error:from backend');
     });
 });
 
