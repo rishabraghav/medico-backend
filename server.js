@@ -12,7 +12,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 app.use(cors({
-  origin: 'http://localhost:3000'
+  origin: 'https://medico-sks.netlify.app/'
 }));
 
 app.use((req, res, next) => {
@@ -27,7 +27,7 @@ app.use((req, res, next) => {
 //MONGOOSE CONNECTION
 
 
-mongoose.connect("mongodb://localhost:27017/medicineDatabase", {
+mongoose.connect(process.env.MONGO_URI, {
     useNewUrlParser: true,
     // useUnifiedTopolody: true
 }).then(() => {
